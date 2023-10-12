@@ -1,23 +1,38 @@
 import { View, Image } from 'react-native';
-import {
-  PanGestureHandler,
-  TapGestureHandler,
-} from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  useAnimatedGestureHandler,
   withSpring,
 } from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 const AnimatedView = Animated.createAnimatedComponent(View);
 
 export default function EmojiSticker({ imageSize, stickerSource }) {
+  const scaleImage = useSharedValue(imageSize);
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
+  const contextX = useSharedValue(0);
+  const contextY = useSharedValue(0);
 
-  const scaleImage = useSharedValue(imageSize);
+  const onDoubleTap = Gesture.Tap().numberOfTaps(2)
+    .onEnd(() => {
+      if (scaleImage.value !== imageSize * 2) {
+        scaleImage.value = scaleImage.value * 2;
+      } else {
+        scaleImage.value = scaleImage.value / 2;
+      }
+    });
+  const onDrag = Gesture.Pan()
+    .onBegin(() => {
+      contextX.value = translateX.value;
+      contextY.value = translateY.value;
+    })
+    .onChange((event) => {
+      translateX.value = event.translationX + contextX.value;
+      translateY.value = event.translationY + contextY.value;
+    });
 
   const imageStyle = useAnimatedStyle(() => {
     return {
@@ -25,7 +40,6 @@ export default function EmojiSticker({ imageSize, stickerSource }) {
       height: withSpring(scaleImage.value),
     };
   });
-
   const containerStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -39,36 +53,17 @@ export default function EmojiSticker({ imageSize, stickerSource }) {
     };
   });
 
-  const onDoubleTap = useAnimatedGestureHandler({
-    onActive: () => {
-      if (scaleImage.value !== imageSize * 2) {
-        scaleImage.value = scaleImage.value * 2;
-      }
-    },
-  });
-
-  const onDrag = useAnimatedGestureHandler({
-    onStart: (event, context) => {
-      context.translateX = translateX.value;
-      context.translateY = translateY.value;
-    },
-    onActive: (event, context) => {
-      translateX.value = event.translationX + context.translateX;
-      translateY.value = event.translationY + context.translateY;
-    },
-  });
-
   return (
-    <PanGestureHandler onGestureEvent={onDrag}>
-      <AnimatedView style={[containerStyle, { top: -350, left: 50 }]}>
-        <TapGestureHandler onGestureEvent={onDoubleTap} numberOfTaps={2}>
+    <GestureDetector gesture={onDrag}>
+      <AnimatedView style={[containerStyle, { top: -350 }]}>
+        <GestureDetector gesture={onDoubleTap}>
           <AnimatedImage
             source={stickerSource}
             resizeMode="contain"
             style={[imageStyle, { width: imageSize, height: imageSize }]}
           />
-        </TapGestureHandler>
+        </GestureDetector>
       </AnimatedView>
-    </PanGestureHandler>
+    </GestureDetector>
   );
 }
