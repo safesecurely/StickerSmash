@@ -6,16 +6,34 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "lint": "eslint --ext .jsx --ext .jsx ./src",
+    "lint:fix": "eslint --fix --ext .jsx --ext .jsx ./src",
+    "format": "prettier --check ./src",
+    "write": "prettier --write ./src"
   },
   "dependencies": {
+    "@expo/webpack-config": "^19.0.0",
     "expo": "~49.0.13",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
-    "react-native": "0.72.5"
+    "react-dom": "18.2.0",
+    "react-native": "0.72.5",
+    "react-native-web": "~0.19.6",
+    "@expo/vector-icons": "^13.0.0",
+    "expo-image-picker": "~14.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3"
   },
   "private": true
 }
