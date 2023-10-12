@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
     borderColor: '#ffd33d',
     borderRadius: 42,
     padding: 3,
+    // Note: can use the below style props to control the respective borderRadius via four quadrants.
+    // borderTopLeftRadius: 20, 
+    // borderTopRightRadius: 40, 
+    // borderBottomLeftRadius: 60, 
+    // borderBottomRightRadius: 80
   },
   circleButton: {
     flex: 1,
