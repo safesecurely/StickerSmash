@@ -23,7 +23,8 @@ export default function EmojiList({ onSelect, onCloseModal }) {
             onPress={() => {
               onSelect(item);
               onCloseModal();
-            }}>
+            }}
+          >
             <Image source={item} key={index} style={styles.image} />
           </Pressable>
         );
