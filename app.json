@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "StickerSmash",
-    "slug": "StickerSmash",
+    "name": "StickerSmashUltra",
+    "slug": "StickerSmashUltra",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,14 +16,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.safesecurely.StickerSmash"
+      "bundleIdentifier": "com.safesecurely.StickerSmashUltra"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.safesecurely.StickerSmash"
+      "package": "com.safesecurely.StickerSmashUltra"
     },
     "web": {
       "favicon": "./assets/favicon.png"
