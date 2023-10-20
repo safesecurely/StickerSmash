@@ -16,7 +16,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.safesecurely.StickerSmash"
+      "bundleIdentifier": "com.safesecurely.StickerSmash",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
