@@ -16,7 +16,8 @@ export default function EmojiSticker({ imageSize, stickerSource }) {
   const contextX = useSharedValue(0);
   const contextY = useSharedValue(0);
 
-  const onDoubleTap = Gesture.Tap().numberOfTaps(2)
+  const onDoubleTap = Gesture.Tap()
+    .numberOfTaps(2)
     .onEnd(() => {
       if (scaleImage.value !== imageSize * 2) {
         scaleImage.value = scaleImage.value * 2;
